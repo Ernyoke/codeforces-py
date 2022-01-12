@@ -5,6 +5,9 @@ input = sys.stdin.readline
 
 def read():
     return list(map(int, input().strip().split()))
+
+
+if __name__ == "__main__":
     pre = [[0] * 18 for _ in range(0, 2 * 10 ** 5 + 1)]
     for i in range(1, 2 * 10 ** 5 + 1):
         for j in range(0, 18):
