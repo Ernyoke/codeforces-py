@@ -1,3 +1,11 @@
+import sys
+
+input = sys.stdin.readline
+MAX = sys.maxsize
+
+sys.setrecursionlimit(10 ** 9)
+
+
 # Input functions
 def inp():
     return int(input())
