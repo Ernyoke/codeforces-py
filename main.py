@@ -11,7 +11,7 @@ def inp():
     return int(input())
 
 
-def rea_int_list():
+def read_int_list():
     return list(map(int, input().split()))
 
 
