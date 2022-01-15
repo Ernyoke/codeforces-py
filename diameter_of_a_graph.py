@@ -32,12 +32,3 @@ if __name__ == "__main__":
     for _ in range(t):
         n, m, k = read()
         print(solve(n, m, k))
-
-    # a = 0
-    # b = 2
-    # for y in range(550):
-    #     print(f'1 {a} {b}')
-    #     b += 1
-    #     if b == 4:
-    #         b = 2
-    #         a += 1
