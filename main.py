@@ -24,5 +24,11 @@ def read_int_map():
     return map(int, input().split())
 
 
-if __name__ == "__main__":
+# Solution
+def solve():
     pass
+
+
+if __name__ == "__main__":
+    for _ in range(inp()):
+        solve()
