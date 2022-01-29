@@ -28,6 +28,16 @@ def read_int_map():
 
 
 # Solution
+class Segment:
+    def __init__(self, start, end, cnt):
+        self.start = start
+        self.end = end
+        self.cnt = cnt
+
+    def __repr__(self):
+        return f'({self.start} {self.end} {self.cnt})'
+
+
 def solve(colors):
     idx_map = defaultdict(list)
     for idx, color in enumerate(colors):
@@ -40,40 +50,31 @@ def solve(colors):
 
     segments.sort()
 
-    i = 0
-    groups = []
+    if len(segments) <= 0:
+        return 0
+
+    i = 1
+    ans = []
+    curr_seg = Segment(segments[0][0], segments[0][1], 0)
     while i < len(segments):
-        s = segments[i]
-        j = i + 1
-        group = []
-        next_s = s
-        while j < len(segments):
-            next_s = segments[j]
-            if s[0] == next_s[0]:
-                if next_s[1] > s[1]:
-                    s = next_s
-            elif s[0] < next_s[0] < s[1] < next_s[1]:
-                group.append(s)
-                s = next_s
-            elif s[1] < next_s[0]:
-                break
-            j += 1
-        group.append(s)
-        if j == len(segments):
-            group.append(next_s)
-        groups.append(group)
-        i = j
+        if curr_seg.end < segments[i][0]:
+            ans.append(curr_seg)
+            curr_seg = Segment(segments[i][0], segments[i][1], 0)
+        else:
+            end = segments[i][1]
+            j = i
+            while j < len(segments) and segments[j][0] <= curr_seg.end:
+                end = max(end, segments[j][1])
+                j += 1
+            if end > curr_seg.end:
+                curr_seg.end = end
+                curr_seg.cnt += 1
+            i = j
+    ans.append(curr_seg)
 
     res = 0
-    for g in groups:
-        if len(g) == 1:
-            s = g[0]
-            res += max(0, s[1] - s[0] - 1)
-        else:
-            s1 = g[0]
-            s2 = g[-1]
-            res += max(0, s2[1] - s1[0] - 1)
-
+    for seg in ans:
+        res += (seg.end - seg.start - seg.cnt - 1)
     return res
 
 
